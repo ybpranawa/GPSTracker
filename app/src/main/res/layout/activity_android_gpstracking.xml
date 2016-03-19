@@ -9,11 +9,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.pranawa.gpstracker.AndroidGPSTrackingActivity">
 
-    <Button
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Location"
-        android:id="@+id/btnShowLocation"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Location"
+            android:id="@+id/btnShowLocation"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Location"
+            android:id="@+id/btnSendLocation"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 </RelativeLayout>

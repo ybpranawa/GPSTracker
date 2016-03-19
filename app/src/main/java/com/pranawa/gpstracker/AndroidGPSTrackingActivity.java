@@ -10,6 +10,7 @@ import android.widget.Toast;
 public class AndroidGPSTrackingActivity extends Activity {
 
     Button btnShowLocation;
+    Button btnSendLocation;
 
     // GPSTracker class
     GPSTracker gps;
@@ -20,6 +21,7 @@ public class AndroidGPSTrackingActivity extends Activity {
         setContentView(R.layout.activity_android_gpstracking);
 
         btnShowLocation = (Button) findViewById(R.id.btnShowLocation);
+        btnSendLocation = (Button) findViewById(R.id.btnSendLocation);
 
         // show location button click event
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +49,26 @@ public class AndroidGPSTrackingActivity extends Activity {
 
             }
         });
+
+        btnSendLocation.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                gps = new GPSTracker(AndroidGPSTrackingActivity.this);
+
+                if (gps.canGetLocation()){
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+                    double acc=gps.getAccuracy();
+
+                    //send it to server
+                }else{
+                    gps.showSettingsAlert();
+                }
+            }
+        });
+
+
     }
 
 }
