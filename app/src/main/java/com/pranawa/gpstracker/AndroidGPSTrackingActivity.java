@@ -90,6 +90,7 @@ public class AndroidGPSTrackingActivity extends Activity {
                 }
             }
         });
+
     }
 
 }
