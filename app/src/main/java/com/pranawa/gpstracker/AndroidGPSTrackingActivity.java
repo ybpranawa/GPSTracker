@@ -7,6 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+
 public class AndroidGPSTrackingActivity extends Activity {
 
     Button btnShowLocation;
@@ -55,20 +66,30 @@ public class AndroidGPSTrackingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 gps = new GPSTracker(AndroidGPSTrackingActivity.this);
+                try {
+                    URL url = new URL("http://localhost/gpstracker");
+                    HttpURLConnection urlConnection=(HttpURLConnection) url.openConnection();
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setChunkedStreamingMode(0);
 
-                if (gps.canGetLocation()){
-                    double latitude = gps.getLatitude();
-                    double longitude = gps.getLongitude();
-                    double acc=gps.getAccuracy();
+                    if (gps.canGetLocation()){
+                        double latitude = gps.getLatitude();
+                        double longitude = gps.getLongitude();
+                        double acc=gps.getAccuracy();
 
-                    //send it to server
-                }else{
-                    gps.showSettingsAlert();
+                        //send it to server
+
+                        OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
+
+                    }else{
+                        gps.showSettingsAlert();
+                    }
+                    urlConnection.disconnect();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
-
-
     }
 
 }
